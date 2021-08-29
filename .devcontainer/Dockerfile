@@ -1,7 +1,4 @@
-FROM node:10.24.1
-# NOTE: node v8.9.4 is not support coz it is too old to be supported by the apt-get update source... so I changed to use node v10.24.1 instead.
-
-
+FROM node:10.15.3
 
 # Configure to reduce warnings and limitations as instruction from official VSCode Remote-Containers.
 # See https://code.visualstudio.com/docs/remote/containers-advanced#_reducing-dockerfile-build-warnings.
@@ -19,7 +16,7 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 RUN npm install -g node-gyp
 RUN npm install -g ganache-cli
 RUN npm install -g secp256k1
-RUN npm install -g --unsafe-perm truffle@5.0.2
+RUN npm install -g --unsafe-perm truffle@5.1.43
 
 # Clean up
 RUN apt-get autoremove -y \
