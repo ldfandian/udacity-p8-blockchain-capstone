@@ -57,6 +57,7 @@ root@b6d633a70f28:/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts#
 
 ### 5. How to mint tokens
 * See [Token Mint Script](./eth-contracts/scripts/mint.js) for the script usage
+  - See [Token Mint Log](./runlog/mint-proof.log) for token minter's runlog
 * See [zokrates](./zokrates/) for zokrates setup
   - [zokrates/code](./zokrates/code/) is the source code of the verifier
   - [zokrates/verifier_square](./zokrates/verifier_square/) is the workdir for the verifier
