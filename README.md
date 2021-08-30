@@ -49,7 +49,7 @@ root@b6d633a70f28:/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts#
 * [SolnSquareVerifier (Contract Address)](https://rinkeby.etherscan.io/address/0x2D9665Fd5410B237f2A228a64D07a743dE5f4B90)
 
 ### 3. Contract ABI
-* Can be found on `runlog/build-contracts-backup/` folder of current repository
+* Can be found on [./runlog/build-contracts-backup/](./runlog/build-contracts-backup/) folder of current repository
 
 ### 4. OpenSea MarketPlace Storefront link
 * [Minter Account](https://rinkeby.opensea.io/accounts/0x4C05a7AD71b652564954651593e0605e7041C04a)
