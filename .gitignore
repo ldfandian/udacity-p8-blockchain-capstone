@@ -3,4 +3,4 @@ node_modules
 package-lock.json
 # don't upload rinkeby testnet seed
 *.secret
-
+.DS_Store

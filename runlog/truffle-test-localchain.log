@@ -1,0 +1,171 @@
+root@bf3e91caca08:/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts# truffle compile --all
+Compiling ./contracts/ERC721Mintable.sol...
+Compiling ./contracts/Migrations.sol...
+Compiling ./contracts/Oraclize.sol...
+Compiling ./contracts/SolnSquareVerifier.sol...
+Compiling ./contracts/verifier.sol...
+Compiling openzeppelin-solidity/contracts/drafts/Counters.sol...
+Compiling openzeppelin-solidity/contracts/math/SafeMath.sol...
+Compiling openzeppelin-solidity/contracts/token/ERC721/IERC721Receiver.sol...
+Compiling openzeppelin-solidity/contracts/utils/Address.sol...
+
+Compilation warnings encountered:
+
+/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts/contracts/Oraclize.sol:320:7: Warning: Unreachable code.
+      _networkID; // silence the warning and remain backwards compatible
+      ^--------^
+,/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts/contracts/Oraclize.sol:373:7: Warning: Unreachable code.
+      _myid; _result; _proof; // Silence compiler warnings
+      ^--------------------^
+,/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts/contracts/Oraclize.sol:371:5: Warning: Function state mutability can be restricted to pure
+    function __callback(bytes32 _myid, string memory _result, bytes memory _proof) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+,/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts/contracts/verifier.sol:449:5: Warning: Function state mutability can be restricted to view
+    function addition(G2Point memory p1, G2Point memory p2) internal returns (G2Point memory r) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+Writing artifacts to ./build/contracts
+
+root@bf3e91caca08:/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts# truffle migrate --reset
+Compiling ./contracts/ERC721Mintable.sol...
+Compiling ./contracts/SolnSquareVerifier.sol...
+
+Compilation warnings encountered:
+
+/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts/contracts/Oraclize.sol:320:7: Warning: Unreachable code.
+      _networkID; // silence the warning and remain backwards compatible
+      ^--------^
+,/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts/contracts/Oraclize.sol:373:7: Warning: Unreachable code.
+      _myid; _result; _proof; // Silence compiler warnings
+      ^--------------------^
+,/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts/contracts/Oraclize.sol:371:5: Warning: Function state mutability can be restricted to pure
+    function __callback(bytes32 _myid, string memory _result, bytes memory _proof) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+,/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts/contracts/verifier.sol:449:5: Warning: Function state mutability can be restricted to view
+    function addition(G2Point memory p1, G2Point memory p2) internal returns (G2Point memory r) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+Writing artifacts to ./build/contracts
+
+⚠️  Important ⚠️
+If you're using an HDWalletProvider, it must be Web3 1.0 enabled or your migration will hang.
+
+
+Starting migrations...
+======================
+> Network name:    'development'
+> Network id:      1337
+> Block gas limit: 6721975
+
+
+1_initial_migration.js
+======================
+
+   Replacing 'Migrations'
+   ----------------------
+   > transaction hash:    0xf40e65a783bd87e1a7fc3abf0c56eef77ca6fc994f0b71d7954a1737684f5988
+   > Blocks: 0            Seconds: 0
+   > contract address:    0x00B859deb0001F219f093DBB3530f3Ef6DC4CD1b
+   > account:             0xf1Ee211E9Fc527A80f71E25ee9aD46034709708C
+   > balance:             987.18360808
+   > gas used:            234970
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0046994 ETH
+
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:           0.0046994 ETH
+
+
+2_deploy_contracts.js
+=====================
+
+   Replacing 'Verifier'
+   --------------------
+   > transaction hash:    0x5eebca19c2af5cb2d905329839e2abfd1abefd8f66f65be38c3fcc25d771e4ba
+   > Blocks: 0            Seconds: 0
+   > contract address:    0x94Ef678e39747523a1A2A5f4b798Ee8fD25a053E
+   > account:             0xf1Ee211E9Fc527A80f71E25ee9aD46034709708C
+   > balance:             987.16247168
+   > gas used:            1035616
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.02071232 ETH
+
+
+   Replacing 'SolnSquareVerifier'
+   ------------------------------
+   > transaction hash:    0x9744ab0f23dbfcd4714f5c9036ccbbcffeca79ae474ba3ceb45a849099e8a4df
+   > Blocks: 0            Seconds: 0
+   > contract address:    0xD0c21AAc17B06ce223E281CCdD0de9ADd47A6089
+   > account:             0xf1Ee211E9Fc527A80f71E25ee9aD46034709708C
+   > balance:             987.08271262
+   > gas used:            3987953
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.07975906 ETH
+
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.10047138 ETH
+
+
+Summary
+=======
+> Total deployments:   3
+> Final cost:          0.10517078 ETH
+
+root@bf3e91caca08:/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts# truffle test           
+Using network 'development'.
+
+Compiling ./contracts/ERC721Mintable.sol...
+Compiling ./contracts/SolnSquareVerifier.sol...
+
+Compilation warnings encountered:
+
+/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts/contracts/Oraclize.sol:320:7: Warning: Unreachable code.
+      _networkID; // silence the warning and remain backwards compatible
+      ^--------^
+,/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts/contracts/Oraclize.sol:373:7: Warning: Unreachable code.
+      _myid; _result; _proof; // Silence compiler warnings
+      ^--------------------^
+,/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts/contracts/Oraclize.sol:371:5: Warning: Function state mutability can be restricted to pure
+    function __callback(bytes32 _myid, string memory _result, bytes memory _proof) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+,/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts/contracts/verifier.sol:449:5: Warning: Function state mutability can be restricted to view
+    function addition(G2Point memory p1, G2Point memory p2) internal returns (G2Point memory r) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+
+
+  Contract: TestERC721Mintable
+    match erc721 spec
+      ✓ should return total supply (55ms)
+      ✓ should get token balance (106ms)
+      ✓ should return token uri (192ms)
+      ✓ should transfer token from one owner to another (2347ms)
+    have ownership properties
+      ✓ should fail when minting when address is not contract owner (129ms)
+      ✓ should return contract owner (57ms)
+
+  Contract: TestSolnSquareVerifier
+    test zokrates square verifier
+      ✓ Test if a new solution can be added for contract - positive (962ms)
+      ✓ Test if a new solution can be added for contract - negative (1290ms)
+      ✓ Test if an ERC721 token can be minted for contract - positive (2793ms)
+      ✓ Test if an ERC721 token can be minted for contract - negative (1225ms)
+
+  Contract: TestZokratesSquareVerifier
+    test zokrates square verifier
+      ✓ Test verification with correct proof (404ms)
+      ✓ Test verification with incorrect proof (783ms)
+
+
+  12 passing (19s)
+
+root@bf3e91caca08:/mnt/devroot/src/udacity-p8-blockchain-capstone/eth-contracts# 

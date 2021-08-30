@@ -6,6 +6,7 @@ contract('TestERC721Mintable', accounts => {
 
     const account_one = accounts[0];
     const account_two = accounts[1];
+    const account_three = accounts[2];
 
     const TestERC721Name_one = 'TestERC721Contract-One';
     const TestERC721Symbol_one = 'TEC1';
@@ -46,19 +47,32 @@ contract('TestERC721Mintable', accounts => {
             await this.contract.transferFrom(account_two, account_one, 1, { from:account_two });
             assert.equal(await this.contract.ownerOf(1), account_one);
 
-            truffleAssert.reverts(this.contract.transferFrom(account_one, account_two, 1, { from:account_two }));
-            truffleAssert.reverts(this.contract.transferFrom(account_two, account_one, 2, { from:account_one }));
+            await truffleAssert.reverts(this.contract.transferFrom(account_one, account_two, 1, { from:account_two }));
+            await truffleAssert.reverts(this.contract.transferFrom(account_two, account_one, 2, { from:account_one }));
 
-            truffleAssert.reverts(this.contract.transferFrom(account_one, account_one, 1, { from:account_one }),
+            await truffleAssert.reverts(this.contract.transferFrom(account_one, account_one, 1, { from:account_one }),
                 'cannot transfer to the same address');
 
-            truffleAssert.reverts(this.contract.transferFrom(account_one, '0x0000000000000000000000000000000000000000', 1, { from:account_one }),
+            await truffleAssert.reverts(this.contract.transferFrom(account_one, '0x0000000000000000000000000000000000000000', 1, { from:account_one }),
                 'to address is invalid');
 
-            truffleAssert.reverts(this.contract.transferFrom(account_two, account_one, 2, { from:account_one }),
+            await truffleAssert.reverts(this.contract.transferFrom(account_two, account_one, 2, { from:account_one }),
                 'from address is not the owner of the given token');
 
-            truffleAssert.reverts(this.contract.transferFrom(account_one, account_two, 100000, { from:account_one }));
+            await truffleAssert.reverts(this.contract.transferFrom(account_one, account_two, 100000, { from:account_one }));
+
+            await truffleAssert.reverts(this.contract.transferFrom(account_one, account_two, 1, { from:account_three }),
+                'only owner or approval can do it');
+
+            await this.contract.setApprovalForAll(account_three, true, { from:account_one });
+            await this.contract.transferFrom(account_one, account_two, 1, { from:account_three });
+            assert.equal(await this.contract.ownerOf(1), account_two);
+            await this.contract.transferFrom(account_two, account_one, 1, { from:account_two });
+            assert.equal(await this.contract.ownerOf(1), account_one);
+
+            await this.contract.setApprovalForAll(account_three, false, { from:account_one });
+            await truffleAssert.reverts(this.contract.transferFrom(account_one, account_two, 1, { from:account_three }),
+                'only owner or approval can do it');
         })
     });
 
@@ -69,7 +83,7 @@ contract('TestERC721Mintable', accounts => {
         })
 
         it('should fail when minting when address is not contract owner', async function () { 
-            truffleAssert.reverts(this.contract.mint(account_one, 10, "", { from:account_one }),
+            await truffleAssert.reverts(this.contract.mint(account_one, 10, "", { from:account_one }),
                 'Only owner can call the function');
         })
 

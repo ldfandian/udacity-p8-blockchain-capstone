@@ -166,7 +166,6 @@ contract ERC721 is Pausable, ERC165 {
     function ownerOf(uint256 tokenId) public view returns (address) {
         // return the owner of the given tokenId
         address tokenOwner = _tokenOwner[tokenId];
-        require (tokenOwner != address(0), 'the token does not exist');
         return tokenOwner;
     }
 
@@ -191,10 +190,7 @@ contract ERC721 is Pausable, ERC165 {
     }
 
     function getApproved(uint256 tokenId) public view returns (address) {
-        require(_exists(tokenId), 'the token does not exist');
-
         address approval = _tokenApprovals[tokenId];
-        require(approval != address(0), 'the token approval does not exist');
         return approval;
     }
 
@@ -221,7 +217,7 @@ contract ERC721 is Pausable, ERC165 {
     }
 
     function transferFrom(address from, address to, uint256 tokenId) public {
-        require(_isApprovedOrOwner(msg.sender, tokenId));
+        require(_isApprovedOrOwner(msg.sender, tokenId), 'only owner or approval can do it');
 
         _transferFrom(from, to, tokenId);
     }

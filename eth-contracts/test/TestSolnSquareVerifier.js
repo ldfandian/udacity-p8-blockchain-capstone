@@ -50,7 +50,7 @@ contract('TestSolnSquareVerifier', accounts => {
             // failed solution verification
             {
                 let badInputs = [proofConfig.PROOF_9.inputs[0], proofConfig.PROOF_16.inputs[1]];
-                truffleAssert.reverts(
+                await truffleAssert.reverts(
                     this.contract.addSolution(
                         proofConfig.PROOF_16.a, proofConfig.PROOF_16.b, proofConfig.PROOF_16.c, badInputs, { from: account_two }),
                     'verification of the solution failed');
@@ -64,7 +64,7 @@ contract('TestSolnSquareVerifier', accounts => {
                     return expect(ev.to).equal(account_one);
                 });
 
-                truffleAssert.reverts(
+                await truffleAssert.reverts(
                     this.contract.addSolution(
                         proofConfig.PROOF_9.a, proofConfig.PROOF_9.b, proofConfig.PROOF_9.c, proofConfig.PROOF_9.inputs, { from: account_one }),
                     'solution has been added');
@@ -132,7 +132,7 @@ contract('TestSolnSquareVerifier', accounts => {
             // solution does not exist
             {
                 let badInputs = [proofConfig.PROOF_9.inputs[0], proofConfig.PROOF_16.inputs[1]];
-                truffleAssert.reverts(
+                await truffleAssert.reverts(
                     this.contract.mintNewNFT(badInputs, account_one, { from: account_one }),
                     'solution does not exist');
             }
@@ -149,7 +149,7 @@ contract('TestSolnSquareVerifier', accounts => {
 
             // it is not your solution
             {
-                truffleAssert.reverts(
+                await truffleAssert.reverts(
                     this.contract.mintNewNFT(proofConfig.PROOF_9.inputs, account_one, { from: account_two }),
                     'it is not your solution');
             }
@@ -165,9 +165,9 @@ contract('TestSolnSquareVerifier', accounts => {
 
             // solution has been minted
             {
-                truffleAssert.reverts(
+                await truffleAssert.reverts(
                     this.contract.mintNewNFT(proofConfig.PROOF_9.inputs, account_one, { from: account_one }),
-                    'solution does not exist');
+                    'the given token already exists');
             }
         })
     });

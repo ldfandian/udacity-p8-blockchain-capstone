@@ -25,19 +25,21 @@ contract('TestZokratesSquareVerifier', accounts => {
         })
 
         it('Test verification with incorrect proof', async function () {
-            let txProofBad;
-            
-            txProofBad = await this.contract.verifyTx(
-                proofConfig.PROOF_9.a, proofConfig.PROOF_9.b, proofConfig.PROOF_9.c, proofConfig.PROOF_16.inputs);
-            truffleAssert.eventNotEmitted(txProofBad, 'Verified', (ev) => {
-                return true;
-            });
-            
-            txProofBad = await this.contract.verifyTx(
-                proofConfig.PROOF_9.a, proofConfig.PROOF_9.b, proofConfig.PROOF_16.c, proofConfig.PROOF_9.inputs);
-            truffleAssert.eventNotEmitted(txProofBad, 'Verified', (ev) => {
-                return true;
-            });
+            {
+                let txProofBad = await this.contract.verifyTx(
+                    proofConfig.PROOF_9.a, proofConfig.PROOF_9.b, proofConfig.PROOF_9.c, proofConfig.PROOF_16.inputs);
+                truffleAssert.eventNotEmitted(txProofBad, 'Verified', (ev) => {
+                    return true;
+                });
+            }
+
+            {
+                let txProofBad = await this.contract.verifyTx(
+                    proofConfig.PROOF_9.a, proofConfig.PROOF_9.b, proofConfig.PROOF_16.c, proofConfig.PROOF_9.inputs);
+                truffleAssert.eventNotEmitted(txProofBad, 'Verified', (ev) => {
+                    return true;
+                });
+            }
         })
     });
 

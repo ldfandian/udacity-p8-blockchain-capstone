@@ -18,11 +18,11 @@
  *
  */
 
-// const HDWalletProvider = require('truffle-hdwallet-provider');
-// const infuraKey = "fj4jll3k.....";
-//
-// const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
+// init rinkeby test env
+const HDWalletProvider = require('../node_modules/truffle-hdwallet-provider');
+const infuraKey = "b1e58431d4b14c639767eb364767aff6";
+const fs = require('fs');
+const mnemonic = fs.readFileSync("./rinkeby-account-mnemonic.secret").toString().trim();
 
 module.exports = {
   /**
@@ -47,6 +47,17 @@ module.exports = {
       port: 8545,            // Standard Ethereum port (default: none)
       network_id: "*",       // Any network (default: none)
      },
+
+     rinkeby: {
+      provider: () => new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraKey}`),
+      network_id: 4,       // Rinkeby's id
+      gas: 4500000,        // Rinkeby has a lower block limit than mainnet
+      gasPrice: 10000000000,
+      networkCheckTimeout: 999999, // <- New attribute HERE
+      confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+      timeoutBlocks: 2000, // # of blocks before a deployment times out  (minimum/default: 50)
+      skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+    },
 
     // Another network with more advanced options...
     // advanced: {
