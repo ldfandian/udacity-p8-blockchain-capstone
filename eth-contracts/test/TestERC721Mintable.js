@@ -1,10 +1,4 @@
-// prepare the test env
-var chai = require('../../node_modules/chai');
-chai.use(require('../../node_modules/chai-as-promised'))
-chai.should();
-
-var expect = chai.expect;
-var assert = chai.assert;
+const truffleAssert = require('../../node_modules/truffle-assertions');
 
 var ERC721MintableComplete = artifacts.require('ERC721MintableComplete');
 
@@ -52,19 +46,19 @@ contract('TestERC721Mintable', accounts => {
             await this.contract.transferFrom(account_two, account_one, 1, { from:account_two });
             assert.equal(await this.contract.ownerOf(1), account_one);
 
-            assert.isRejected(this.contract.transferFrom(account_one, account_two, 1, { from:account_two }));
-            assert.isRejected(this.contract.transferFrom(account_two, account_one, 2, { from:account_one }));
+            truffleAssert.reverts(this.contract.transferFrom(account_one, account_two, 1, { from:account_two }));
+            truffleAssert.reverts(this.contract.transferFrom(account_two, account_one, 2, { from:account_one }));
 
-            assert.isRejected(this.contract.transferFrom(account_one, account_one, 1, { from:account_one },
-                'cannot transfer to the same address'));
+            truffleAssert.reverts(this.contract.transferFrom(account_one, account_one, 1, { from:account_one }),
+                'cannot transfer to the same address');
 
-            assert.isRejected(this.contract.transferFrom(account_one, '0x0000000000000000000000000000000000000000', 1, { from:account_one },
-                'to address is invalid'));
+            truffleAssert.reverts(this.contract.transferFrom(account_one, '0x0000000000000000000000000000000000000000', 1, { from:account_one }),
+                'to address is invalid');
 
-            assert.isRejected(this.contract.transferFrom(account_two, account_one, 2, { from:account_one }),
+            truffleAssert.reverts(this.contract.transferFrom(account_two, account_one, 2, { from:account_one }),
                 'from address is not the owner of the given token');
 
-            assert.isRejected(this.contract.transferFrom(account_one, account_two, 100000, { from:account_one }));
+            truffleAssert.reverts(this.contract.transferFrom(account_one, account_two, 100000, { from:account_one }));
         })
     });
 
@@ -75,7 +69,7 @@ contract('TestERC721Mintable', accounts => {
         })
 
         it('should fail when minting when address is not contract owner', async function () { 
-            assert.isRejected(this.contract.mint(account_one, 10, "", { from:account_one }),
+            truffleAssert.reverts(this.contract.mint(account_one, 10, "", { from:account_one }),
                 'Only owner can call the function');
         })
 
